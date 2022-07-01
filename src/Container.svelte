@@ -8,6 +8,19 @@
 
     changeContainer({ url: resource });
 
+    async function reloadContainer() {
+        console.log(`reload ${resource}`);
+
+        let next = await getContainerList(resource);
+
+        if (typeof(next) === 'undefined') {
+            // Do nothing...
+        }
+        else {
+            list = next;
+        }
+    }
+
     async function changeContainer(container : FileInfo) {
         if (container) {
             
@@ -42,21 +55,29 @@
 
 </script>
 
-<p> <b>{resource}</b> </p>
+<p> 
+    <a href="{resource}" on:click|preventDefault={reloadContainer}><b>{resource}</b></a>
+</p>
 
 {#if list}
  <ul>
   {#if containerStack.length}
   <li>
-        <div class="dir_open" on:click={() => changeContainer(null)}>..</div>
+        <div class="dir_open" on:click|preventDefault={() => changeContainer(null)}>..</div>
   </li>
   {/if}
   {#each list as item} 
+    <li>
     {#if item.isDir}
-        <li><div class="dir" on:click={() => changeContainer(item)}>{item.name}</div></li>
+       <div class="dir" on:click|preventDefault={() => changeContainer(item)}>
+            <a href="{item.url}">{item.name}</a>
+       </div>
     {:else}
-       <li><div class="file">{item.name}</div></li>
+       <div class="file">
+            <a href="{item.url}">{item.name}</a>
+       </div>
     {/if}
+    </li>
   {/each}
  </ul>
 {/if}
