@@ -1,13 +1,11 @@
 # AcmeBase
 
-A base implementation of a Solid App with login using svelte
+A base implementation of a Solid App with login and loading a Container
 
 # Usage
 
 ```
-npx degit phochste/AcmeBase my-solid-app
-
-cd my-svelte-project
+cd AcmeContainer
 npm install
 npm run dev
 ```
