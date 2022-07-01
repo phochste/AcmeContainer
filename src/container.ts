@@ -7,20 +7,22 @@ export type FileInfo = {
     isDir?: boolean ,
 };
 
-export function watchContainer(url: string, callback: (string) => void) : Promise<WebSocket> {
+export function watchContainer(url: string, callback: (string) => void) : WebSocket {
     let socket;
     try {
         const websocket = 'wss://' + url.split('/')[2];
-        socket = new WebSocket(websocket, ['solid.0.1.0']);
+        socket = new WebSocket(websocket, ['solid-0.1']);
         socket.onopen = function() {
-            this.send('sub ' + url);
+            console.log(`${websocket} open ${url}`);
             console.log(`${websocket} sub ${url}`);
+            this.send(`sub ${url}`);
         }
         socket.onmessage = function(msg) {
             if (msg.data && msg.data.slice(0,3) === 'pub') {
                 console.log(`ws> ${msg.data}`);
                 callback(msg.data);
             }
+            console.log(msg);
         }
         socket.onerror = function(e) {
             console.error(`${websocket} error ${url} %O`, e);

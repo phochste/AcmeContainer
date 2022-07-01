@@ -36,8 +36,9 @@
             else {
                 resource = container.url;
                 list = next;
+                if (socket) socket.close();
                 socket = watchContainer(resource, (msg) => {
-                    console.log('here');
+                    reloadContainer();
                 });
             }
         }
@@ -51,8 +52,9 @@
             else {
                 resource = url;
                 list = next;
+                if (socket) socket.close();
                 socket = watchContainer(resource, (msg) => {
-                    console.log('here');
+                    reloadContainer();
                 }); 
             }
         }
