@@ -1,10 +1,11 @@
 <script lang="ts">
-    import { getContainerList, type FileInfo } from './container';
+    import { getContainerList, watchContainer, type FileInfo } from './container';
 
     export let resource : string = "";
 
     let containerStack : string[] = [ ];
     let list : FileInfo[] = [];
+    let socket : WebSocket;
 
     changeContainer({ url: resource });
 
@@ -35,6 +36,9 @@
             else {
                 resource = container.url;
                 list = next;
+                socket = watchContainer(resource, (msg) => {
+                    console.log('here');
+                });
             }
         }
         else {
@@ -47,6 +51,9 @@
             else {
                 resource = url;
                 list = next;
+                socket = watchContainer(resource, (msg) => {
+                    console.log('here');
+                }); 
             }
         }
     }

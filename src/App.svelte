@@ -22,4 +22,4 @@
 
 <Login bind:profile={profile}/>
 
-<Container resource="https://patrickhochstenbach.net/"/>
+<Container resource="https://bellow2.ugent.be/test/"/>
