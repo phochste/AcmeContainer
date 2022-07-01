@@ -1,4 +1,4 @@
-# AcmeBase
+# AcmeContainer
 
 A base implementation of a Solid App with login and loading a Container
 
