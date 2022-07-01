@@ -49,8 +49,6 @@
                 list = next;
             }
         }
-
-        console.log(containerStack);
     }
 
 </script>
