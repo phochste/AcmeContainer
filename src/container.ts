@@ -67,9 +67,11 @@ export function watchContainer(url: string, callback: (string) => void) : WebSoc
     return socket;   
 }
 
-export function getContainerItem(url: string) : FileInfo {
+export function getContainerItem(url: string) : FileInfo | undefined {
     let file : FileInfo;
 
+    if (! url) return undefined;
+    
     if (url.endsWith('/')) {
         let name = url.replace(/\/$/g,'').replace(/.*\//g,'');
         file = {
