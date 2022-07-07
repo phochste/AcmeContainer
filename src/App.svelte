@@ -33,4 +33,5 @@
 <ContainerSelect 
 	resource="https://patrickhochstenbach.net/"
 	bind:selectedResource
+	on:change={(e) => console.log(e.detail)}
 	/>

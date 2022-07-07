@@ -1,5 +1,6 @@
 <script lang="ts">
     import AutoComplete from 'simple-svelte-autocomplete';
+    import { createEventDispatcher } from 'svelte';
     import { ANY_TYPE, getContainerItem, getContainerList, isDirType, isFileType, type FileInfo } from './container';
 
     export let resource : string ;
@@ -7,6 +8,8 @@
     export let create   : boolean = true;
     export let type     : number  = ANY_TYPE;
     export let selectedResource = getContainerItem(resource);
+
+    const dispatch = createEventDispatcher();
 
     let text;
 
@@ -27,9 +30,15 @@
         return containerList;
     }
 
-    function handleChange() {
+    function handleCreate() {
         if (text && create && text != selectedResource.url) {
             selectedResource = getContainerItem(text);
+        }
+    }
+
+    function handleChange() {
+        if (selectedResource && selectedResource.url != resource) {
+            dispatch('change',selectedResource);
         }
     }
 </script>
@@ -42,7 +51,8 @@
     delay=200
     required={required}
     create={create}
-    onCreate={handleChange}
+    onChange={handleChange}
+    onCreate={handleCreate}
     />
 
 <style>
