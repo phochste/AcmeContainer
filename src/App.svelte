@@ -3,7 +3,6 @@
 	import Logout from './Logout.svelte';
 	import Container from './Container.svelte';
 	import ContainerSelect from './ContainerSelect.svelte';
-	import { DIR_TYPE, FILE_TYPE, type FileInfo } from './container';
 
 	export let name: string;
 
