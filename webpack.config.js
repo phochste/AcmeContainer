@@ -56,6 +56,12 @@ module.exports = {
 				]
 			},
 			{
+				test: /\.svg$/,
+				use: {
+					loader: 'svg-loader'
+				}
+			},
+			{
 				// required to prevent errors from Svelte on Webpack 5+
 				test: /node_modules\/svelte\/.*\.mjs$/,
 				resolve: {
